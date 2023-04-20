@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://cap3gixvhvmo1"]
+
+[ext_resource type="Script" path="res://UI.gd" id="1_wqi1v"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wqi1v")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 114.0
+offset_bottom = 41.0
+action_mode = 0
+text = "Choose map"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+initial_position = 1
+title = "Open a File"
+size = Vector2i(800, 800)
+ok_button_text = "Select"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.map ; Map files")
+show_hidden_files = true
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 26.0
+offset_right = 309.0
+offset_bottom = 42.0
+max_value = 2.0
+step = 0.01
+
+[node name="Label" type="Label" parent="HSlider"]
+layout_mode = 0
+offset_top = -21.0
+offset_right = 183.0
+offset_bottom = 2.0
+text = "Rotation Speed"
+horizontal_alignment = 1
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

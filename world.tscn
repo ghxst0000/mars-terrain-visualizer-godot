@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b70squvcdqogx"]
+
+[ext_resource type="PackedScene" uid="uid://cap3gixvhvmo1" path="res://UI.tscn" id="1_cl251"]
+[ext_resource type="Script" path="res://world.gd" id="1_dp1d3"]
+[ext_resource type="Texture2D" uid="uid://cpxllxu2gfdyf" path="res://assets/environment.png" id="3_c1tjp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1liv6"]
+panorama = ExtResource("3_c1tjp")
+
+[sub_resource type="Sky" id="Sky_gf7kr"]
+sky_material = SubResource("PanoramaSkyMaterial_1liv6")
+
+[sub_resource type="Environment" id="Environment_3wfwq"]
+background_mode = 2
+sky = SubResource("Sky_gf7kr")
+
+[node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 100)
+script = ExtResource("1_dp1d3")
+
+[node name="UI" parent="." instance=ExtResource("1_cl251")]
+
+[node name="FileDialog" parent="UI" index="1"]
+ok_button_text = "Open"
+
+[node name="HSlider" parent="UI" index="2"]
+value = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 100, 100)
+fov = 45.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0933588, -0.355727, 0.929915, 0.0355346, 0.93459, 0.353948, -0.994998, -3.62791e-29, 0.0998928, 232.061, 2.25635, 35.9748)
+
+[node name="BlockContainer" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3wfwq")
+
+[connection signal="file_selected" from="UI/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="value_changed" from="UI/HSlider" to="." method="_on_h_slider_value_changed"]
+
+[editable path="UI"]
